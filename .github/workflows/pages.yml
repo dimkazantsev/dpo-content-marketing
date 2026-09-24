@@ -27,6 +27,58 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Build social preview image
+        run: |
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont, ImageFilter
+
+          W, H = 1200, 630
+          img = Image.new("RGB", (W, H), (9, 9, 11))
+
+          def glow(base, cx, cy, color, radius, alpha):
+              layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+              d = ImageDraw.Draw(layer)
+              d.ellipse((cx-radius, cy-radius, cx+radius, cy+radius), fill=(*color, alpha))
+              layer = layer.filter(ImageFilter.GaussianBlur(radius//2))
+              return Image.alpha_composite(base.convert("RGBA"), layer).convert("RGB")
+
+          img = glow(img, 130, 80, (139, 92, 246), 260, 70)
+          img = glow(img, 1060, 80, (66, 232, 224), 220, 55)
+          img = glow(img, 980, 580, (216, 255, 79), 200, 45)
+          d = ImageDraw.Draw(img)
+          d.rounded_rectangle((28, 28, W-28, H-28), radius=34, outline=(48,48,58), width=2)
+
+          bold="/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+          reg="/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+          f_brand=ImageFont.truetype(bold, 28)
+          f_title=ImageFont.truetype(bold, 64)
+          f_sub=ImageFont.truetype(reg, 30)
+          f_badge=ImageFont.truetype(bold, 22)
+          f_small=ImageFont.truetype(reg, 20)
+          f_icon=ImageFont.truetype(bold, 36)
+
+          d.rounded_rectangle((72,68,132,128), radius=16, fill=(216,255,79))
+          d.text((89,74), "К", font=f_icon, fill=(9,9,11))
+          d.text((150,81), "ДПО · АлтГУ", font=f_brand, fill=(245,245,247))
+
+          d.text((72,175), "Контент-маркетинг,", font=f_title, fill=(247,247,248))
+          d.text((72,252), "аналитика и продакшен", font=f_title, fill=(247,247,248))
+          d.rounded_rectangle((72,345,720,356), radius=6, fill=(216,255,79))
+          d.rounded_rectangle((430,345,720,356), radius=6, fill=(66,232,224))
+          d.text((72,385), "От идеи и сценария — до монтажа и продвижения.", font=f_sub, fill=(190,190,200))
+
+          x=72
+          for text in ("72 часа","для новичков","Лайт / Делюкс"):
+              bb=d.textbbox((0,0), text, font=f_badge)
+              tw=bb[2]-bb[0]
+              d.rounded_rectangle((x,472,x+tw+38,516), radius=22, fill=(24,24,31), outline=(75,75,85), width=1)
+              d.text((x+19,480), text, font=f_badge, fill=(235,235,238))
+              x += tw + 60
+
+          d.text((72,555), "dimkazantsev.github.io/dpo-content-marketing/", font=f_small, fill=(137,137,148))
+          img.save("og-cover-social.jpg", "JPEG", quality=84, optimize=True)
+          PY
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
