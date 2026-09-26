@@ -117,164 +117,43 @@ body:before{left:-18vw;top:18vh;background:var(--violet);animation:ambientA 16s 
 body:after{right:-18vw;top:42vh;background:var(--cyan);animation:ambientB 19s ease-in-out infinite alternate}
 .scroll-progress{position:fixed;left:0;top:0;width:100%;height:3px;z-index:120;pointer-events:none;background:rgba(255,255,255,.025)}
 .scroll-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--cyan),var(--violet));box-shadow:0 0 18px rgba(216,255,79,.45);transform-origin:left center}
-.draft-lab-wrap{padding:18px 0 22px}
-.draft-lab-scroll{height:315vh;position:relative}
-.draft-lab{position:sticky;top:92px;height:min(720px,calc(100vh - 116px));min-height:610px;border:1px solid var(--line);border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(139,92,246,.055),rgba(66,232,224,.025));overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) 245px;box-shadow:0 32px 90px rgba(0,0,0,.24)}
-.draft-lab:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 16%,rgba(216,255,79,.08),transparent 26%),radial-gradient(circle at 82% 82%,rgba(66,232,224,.08),transparent 30%);pointer-events:none}
-.draft-main{position:relative;min-width:0;padding:34px 34px 30px;display:flex;flex-direction:column}
-.draft-head{position:relative;z-index:5;display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:20px}
+.draft-lab-wrap{padding:20px 0 28px}
+.draft-lab{border:1px solid var(--line);border-radius:34px;background:linear-gradient(145deg,rgba(255,255,255,.04),rgba(139,92,246,.05),rgba(66,232,224,.025));overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.20)}
+.draft-lab-head{display:grid;grid-template-columns:1fr .85fr;gap:26px;align-items:end;padding:30px 30px 24px}
 .draft-eyebrow{font-size:11px;font-weight:950;letter-spacing:.15em;text-transform:uppercase;color:var(--lime)}
-.draft-title{font-size:clamp(32px,4.4vw,58px);line-height:.98;letter-spacing:-.055em;margin:7px 0 0;max-width:760px}
-.draft-copy{max-width:420px;color:var(--muted);font-size:14px;line-height:1.5;margin:3px 0 0}
-.draft-canvas{position:relative;flex:1;min-height:410px;border:1px solid rgba(255,255,255,.08);border-radius:28px;background:rgba(8,8,11,.52);overflow:hidden}
-.draft-panel{position:absolute;inset:0;padding:26px;opacity:0;transform:translateY(18px) scale(.985);pointer-events:none;transition:opacity .5s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
-.draft-panel.active{opacity:1;transform:none;pointer-events:auto}
-.draft-panel-label{font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:#777783;margin-bottom:16px}
+.draft-title{font-size:clamp(32px,4.2vw,56px);line-height:.98;letter-spacing:-.055em;margin:8px 0 0}
+.draft-copy{color:var(--muted);font-size:15px;line-height:1.55;margin:0;max-width:520px}
+.draft-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:0 30px 20px}
+.draft-tab{appearance:none;border:1px solid rgba(255,255,255,.09);background:rgba(9,9,11,.34);color:#8d8d98;border-radius:18px;padding:12px 10px;cursor:pointer;text-align:left;transition:.22s ease;min-width:0}
+.draft-tab:hover{border-color:rgba(216,255,79,.24);color:#fff}
+.draft-tab.active{background:rgba(216,255,79,.08);border-color:rgba(216,255,79,.42);color:#fff;box-shadow:0 10px 30px rgba(216,255,79,.06)}
+.draft-tab-top{display:flex;align-items:center;gap:8px;margin-bottom:5px}.draft-tab-num{width:27px;height:27px;border-radius:9px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.12);font-size:10px;font-weight:950;background:#111116}.draft-tab.active .draft-tab-num{background:var(--lime);border-color:var(--lime);color:#09090b}.draft-tab b{font-size:13px;line-height:1.1}.draft-tab small{display:block;font-size:10px;color:#666671;line-height:1.2}
+.draft-stage{padding:0 30px 30px}
+.draft-stage-frame{position:relative;min-height:500px;border:1px solid rgba(255,255,255,.08);border-radius:28px;background:rgba(7,7,10,.52);overflow:hidden}
+.draft-stage-frame:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(216,255,79,.05),transparent 26%),radial-gradient(circle at 85% 80%,rgba(66,232,224,.06),transparent 30%);pointer-events:none}
+.draft-panel{position:absolute;inset:0;padding:28px;opacity:0;transform:translateY(14px) scale(.99);pointer-events:none;transition:opacity .38s ease,transform .42s cubic-bezier(.2,.7,.2,1)}
+.draft-panel.active{opacity:1;transform:none;pointer-events:auto}.draft-panel-label{font-size:10px;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:#777783;margin-bottom:16px}
+.draft-stage-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-top:16px}.draft-stage-caption{color:#85858f;font-size:13px}.draft-stage-controls{display:flex;gap:8px}.draft-arrow{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#fff;cursor:pointer;font-size:18px}.draft-arrow:hover{background:var(--lime);color:#09090b;border-color:var(--lime)}
 
-/* stage 01 — messy draft */
-.paper-note{position:absolute;border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:13px 15px;background:#17171d;box-shadow:0 16px 36px rgba(0,0,0,.24);font-size:13px;line-height:1.35;max-width:220px}
-.paper-note em{font-style:normal;color:var(--lime)}
-.paper-note.red{border-color:rgba(255,79,117,.28);color:#ffc1ce}
-.paper-note.yellow{background:rgba(216,255,79,.09);border-color:rgba(216,255,79,.28)}
-.paper-note.cyan{background:rgba(66,232,224,.07);border-color:rgba(66,232,224,.24)}
-.paper-note.n1{left:5%;top:18%;transform:rotate(-5deg)}
-.paper-note.n2{left:34%;top:9%;transform:rotate(3deg)}
-.paper-note.n3{right:7%;top:23%;transform:rotate(-2deg)}
-.paper-note.n4{left:14%;bottom:12%;transform:rotate(4deg)}
-.paper-note.n5{right:22%;bottom:13%;transform:rotate(-4deg)}
-.draft-scribble{position:absolute;left:41%;bottom:11%;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#83838f;font-size:12px;transform:rotate(-3deg)}
-.draft-scribble strong{color:#ff6b89;text-decoration:line-through}
+.draft-board{height:410px;display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.draft-notes,.draft-question{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.022);position:relative;overflow:hidden}.draft-notes{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}.note-card{border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:13px 14px;background:#15151b;font-size:13px;line-height:1.35;min-height:78px}.note-card.lime{border-color:rgba(216,255,79,.28);background:rgba(216,255,79,.07)}.note-card.cyan{border-color:rgba(66,232,224,.24);background:rgba(66,232,224,.06)}.note-card.red{border-color:rgba(255,79,117,.25);color:#ffc1ce}.note-card strong{display:block;color:var(--lime);font-size:10px;letter-spacing:.09em;text-transform:uppercase;margin-bottom:6px}.draft-question{display:flex;flex-direction:column;justify-content:center;padding:28px;background:linear-gradient(145deg,rgba(139,92,246,.10),rgba(255,255,255,.02))}.draft-question small{color:#8d8d98;text-transform:uppercase;letter-spacing:.1em;font-weight:900}.draft-question b{font-size:30px;line-height:1.06;letter-spacing:-.04em;margin:10px 0 14px}.draft-question p{color:var(--muted);font-size:13px;margin:0}.draft-chaos-line{position:absolute;left:20px;right:20px;bottom:17px;color:#656570;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:11px}
 
-/* stage 02 — analysis */
-.analysis-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;height:100%}
-.analysis-col{border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:18px;background:rgba(255,255,255,.025)}
-.analysis-col h4{font-size:12px;color:#8d8d98;text-transform:uppercase;letter-spacing:.11em;margin:0 0 13px}
-.analysis-chip{padding:11px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:#121217;margin:8px 0;font-size:13px}
-.analysis-chip.good{border-color:rgba(216,255,79,.30);background:rgba(216,255,79,.06)}
-.analysis-chip.dim{opacity:.38;text-decoration:line-through}
-.thesis-box{grid-column:1/-1;border:1px solid rgba(66,232,224,.25);background:linear-gradient(135deg,rgba(66,232,224,.07),rgba(139,92,246,.06));border-radius:20px;padding:17px 18px}
-.thesis-box small{display:block;color:var(--cyan);font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
-.thesis-box b{font-size:19px;line-height:1.3}
+.analysis-flow{height:410px;display:grid;grid-template-columns:1fr 72px 1fr;gap:12px;align-items:stretch}.analysis-stack,.analysis-output{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.022);padding:20px}.analysis-stack h4,.analysis-output h4{margin:0 0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#83838f}.analysis-chip{padding:11px 12px;border-radius:13px;border:1px solid rgba(255,255,255,.08);background:#121217;margin:8px 0;font-size:13px}.analysis-chip.good{border-color:rgba(216,255,79,.26);background:rgba(216,255,79,.055)}.analysis-chip.dim{opacity:.38;text-decoration:line-through}.analysis-arrow{display:grid;place-items:center;color:var(--lime);font-size:30px;font-weight:300}.analysis-output{display:flex;flex-direction:column;justify-content:center;background:linear-gradient(145deg,rgba(66,232,224,.07),rgba(139,92,246,.06))}.analysis-output small{color:var(--cyan);font-weight:900;letter-spacing:.09em;text-transform:uppercase}.analysis-output b{font-size:24px;line-height:1.25;margin-top:10px}
 
-/* stage 03 — script */
-.script-ui{height:100%;display:grid;grid-template-columns:190px minmax(0,1fr);gap:12px}
-.script-scenes,.script-page{border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(255,255,255,.025);padding:16px}
-.scene-row{padding:10px;border-radius:12px;color:#8f8f99;font-size:12px;margin-bottom:7px;border:1px solid transparent}
-.scene-row.active{background:rgba(216,255,79,.08);border-color:rgba(216,255,79,.26);color:#fff}
-.scene-row span{display:block;color:var(--lime);font-size:10px;font-weight:900;margin-bottom:4px}
-.script-page{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.65;overflow:hidden}
-.script-page .script-h{color:var(--lime);font-weight:900}
-.script-page .script-comment{color:#70707d}
-.script-page .script-voice{color:#ececf0}
-.script-page .script-broll{color:var(--cyan)}
+.script-ui{height:410px;display:grid;grid-template-columns:180px minmax(0,1fr);gap:12px}.script-scenes,.script-page{border:1px solid rgba(255,255,255,.08);border-radius:22px;background:rgba(255,255,255,.022);padding:16px}.scene-row{padding:10px;border-radius:12px;color:#8f8f99;font-size:12px;margin-bottom:7px;border:1px solid transparent}.scene-row.active{background:rgba(216,255,79,.08);border-color:rgba(216,255,79,.24);color:#fff}.scene-row span{display:block;color:var(--lime);font-size:10px;font-weight:900;margin-bottom:4px}.script-page{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px;line-height:1.7;overflow:hidden}.script-page .script-h{color:var(--lime);font-weight:900}.script-page .script-comment{color:#70707d}.script-page .script-voice{color:#ececf0}.script-page .script-broll{color:var(--cyan)}
 
-/* stage 04 — edit timeline */
-.edit-ui{height:100%;display:grid;grid-template-rows:1fr auto;gap:12px}
-.preview-frame{border-radius:20px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(135deg,#191923,#0d1115);display:grid;place-items:center;position:relative;overflow:hidden}
-.preview-frame:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(139,92,246,.22);filter:blur(75px);left:10%;top:-35%}
-.preview-frame-text{position:relative;text-align:center}
-.preview-frame-text small{display:block;color:var(--lime);font-weight:900;letter-spacing:.11em;text-transform:uppercase}
-.preview-frame-text b{display:block;font-size:32px;line-height:1.03;letter-spacing:-.04em;margin-top:7px}
-.timeline{border:1px solid rgba(255,255,255,.08);border-radius:20px;background:#0d0d12;padding:14px;position:relative;overflow:hidden}
-.timeline-ruler{display:flex;justify-content:space-between;color:#60606b;font-size:9px;margin:0 5px 8px 72px}
-.track{display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;margin:6px 0}
-.track-name{font-size:9px;color:#777783;text-transform:uppercase;letter-spacing:.08em}
-.track-clips{height:25px;display:flex;gap:5px;position:relative}
-.clip{height:100%;border-radius:6px;background:rgba(139,92,246,.55);border:1px solid rgba(180,150,255,.25)}
-.clip.cyan{background:rgba(66,232,224,.42)}
-.clip.lime{background:rgba(216,255,79,.42)}
-.clip.gray{background:rgba(255,255,255,.12)}
-.playhead{position:absolute;top:22px;bottom:8px;left:54%;width:1px;background:#ff5275;box-shadow:0 0 12px rgba(255,82,117,.6)}
-.playhead:before{content:"";position:absolute;top:-6px;left:-4px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #ff5275}
+.edit-ui{height:410px;display:grid;grid-template-rows:1fr auto;gap:12px}.preview-frame{border-radius:22px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(135deg,#191923,#0d1115);display:grid;place-items:center;position:relative;overflow:hidden}.preview-frame:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:rgba(139,92,246,.20);filter:blur(75px);left:12%;top:-40%}.preview-frame-text{position:relative;text-align:center}.preview-frame-text small{display:block;color:var(--lime);font-weight:900;letter-spacing:.11em;text-transform:uppercase}.preview-frame-text b{display:block;font-size:31px;line-height:1.03;letter-spacing:-.04em;margin-top:7px}.timeline{border:1px solid rgba(255,255,255,.08);border-radius:20px;background:#0d0d12;padding:14px;position:relative;overflow:hidden}.timeline-ruler{display:flex;justify-content:space-between;color:#60606b;font-size:9px;margin:0 5px 8px 72px}.track{display:grid;grid-template-columns:60px 1fr;gap:10px;align-items:center;margin:6px 0}.track-name{font-size:9px;color:#777783;text-transform:uppercase;letter-spacing:.08em}.track-clips{height:25px;display:flex;gap:5px;position:relative}.clip{height:100%;border-radius:6px;background:rgba(139,92,246,.55);border:1px solid rgba(180,150,255,.25)}.clip.cyan{background:rgba(66,232,224,.42)}.clip.lime{background:rgba(216,255,79,.42)}.clip.gray{background:rgba(255,255,255,.12)}.playhead{position:absolute;top:22px;bottom:8px;left:54%;width:1px;background:#ff5275;box-shadow:0 0 12px rgba(255,82,117,.6)}.playhead:before{content:"";position:absolute;top:-6px;left:-4px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #ff5275}
 
-/* stage 05 — result */
-.result-ui{height:100%;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(210px,.65fr);gap:14px}
-.result-video{border-radius:22px;border:1px solid rgba(255,255,255,.1);background:radial-gradient(circle at 70% 20%,rgba(66,232,224,.17),transparent 35%),linear-gradient(145deg,#1a1827,#0c1013);position:relative;overflow:hidden;display:grid;place-items:center}
-.result-video:after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(transparent,rgba(0,0,0,.72))}
-.result-play{width:76px;height:76px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:#09090b;font-size:30px;position:relative;z-index:2;box-shadow:0 14px 50px rgba(216,255,79,.18)}
-.result-caption{position:absolute;left:22px;right:22px;bottom:20px;z-index:3}
-.result-caption small{color:var(--lime);font-weight:900;text-transform:uppercase;letter-spacing:.1em}
-.result-caption b{display:block;font-size:24px;line-height:1.05;margin-top:5px}
-.result-side{border-radius:22px;border:1px solid rgba(255,255,255,.09);padding:20px;background:rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:center}
-.result-side .check{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px;color:#d6d6dc}
-.result-side .check:before{content:"✓";color:var(--lime);font-weight:950;margin-right:9px}
-.result-side strong{font-size:22px;line-height:1.1;margin-bottom:12px}
+.result-ui{height:410px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(230px,.65fr);gap:14px}.result-video{border-radius:22px;border:1px solid rgba(255,255,255,.1);background:radial-gradient(circle at 70% 20%,rgba(66,232,224,.16),transparent 35%),linear-gradient(145deg,#1a1827,#0c1013);position:relative;overflow:hidden;display:grid;place-items:center}.result-video:after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(transparent,rgba(0,0,0,.72))}.result-play{width:74px;height:74px;border-radius:50%;background:var(--lime);display:grid;place-items:center;color:#09090b;font-size:29px;position:relative;z-index:2}.result-caption{position:absolute;left:22px;right:22px;bottom:20px;z-index:3}.result-caption small{color:var(--lime);font-weight:900;text-transform:uppercase;letter-spacing:.1em}.result-caption b{display:block;font-size:24px;line-height:1.05;margin-top:5px}.result-side{border-radius:22px;border:1px solid rgba(255,255,255,.09);padding:20px;background:rgba(255,255,255,.025);display:flex;flex-direction:column;justify-content:center}.result-side .check{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px;color:#d6d6dc}.result-side .check:before{content:"✓";color:var(--lime);font-weight:950;margin-right:9px}.result-side strong{font-size:22px;line-height:1.1;margin-bottom:12px}
 
-/* right progress rail */
-.draft-nav{position:relative;z-index:5;border-left:1px solid var(--line);background:rgba(8,8,11,.38);padding:30px 22px;display:flex;flex-direction:column}
-.draft-nav-label{font-size:10px;color:#777783;text-transform:uppercase;letter-spacing:.13em;font-weight:900;margin-bottom:20px}
-.draft-step{appearance:none;border:0;background:transparent;color:#8d8d97;display:grid;grid-template-columns:30px 1fr;gap:10px;text-align:left;padding:12px 0;cursor:pointer;position:relative}
-.draft-step:before{content:"";position:absolute;left:14px;top:38px;bottom:-11px;width:1px;background:rgba(255,255,255,.09)}
-.draft-step:last-of-type:before{display:none}
-.draft-step-num{width:30px;height:30px;border-radius:10px;border:1px solid rgba(255,255,255,.12);display:grid;place-items:center;font-size:10px;font-weight:950;background:#111116;transition:.25s}
-.draft-step-text b{display:block;font-size:13px;color:inherit}
-.draft-step-text small{display:block;font-size:10px;color:#666671;margin-top:3px}
-.draft-step.active{color:#fff}
-.draft-step.active .draft-step-num{background:var(--lime);color:#09090b;border-color:var(--lime);box-shadow:0 0 28px rgba(216,255,79,.14)}
-.draft-step.done .draft-step-num{border-color:rgba(66,232,224,.32);color:var(--cyan)}
-.draft-nav-bottom{margin-top:auto;padding-top:20px;color:#6f6f79;font-size:11px;line-height:1.5}
+@media(max-width:980px){.draft-lab-head{grid-template-columns:1fr}.draft-tabs{grid-template-columns:repeat(5,minmax(130px,1fr));overflow-x:auto;padding-bottom:16px;scrollbar-width:none}.draft-tabs::-webkit-scrollbar{display:none}.draft-stage-frame{min-height:470px}}
+@media(max-width:620px){.draft-lab{border-radius:24px}.draft-lab-head{padding:20px 18px 16px}.draft-title{font-size:36px}.draft-copy{font-size:13px}.draft-tabs{padding:0 18px 14px;grid-template-columns:repeat(5,132px)}.draft-stage{padding:0 18px 20px}.draft-stage-frame{min-height:520px;border-radius:20px}.draft-panel{padding:16px}.draft-board{height:470px;grid-template-columns:1fr}.draft-notes{grid-template-columns:1fr 1fr;padding:14px}.note-card{font-size:11px;min-height:70px}.draft-question{padding:18px}.draft-question b{font-size:24px}.draft-chaos-line{display:none}.analysis-flow{height:470px;grid-template-columns:1fr}.analysis-arrow{display:none}.analysis-stack,.analysis-output{padding:14px}.analysis-output b{font-size:19px}.script-ui{height:470px;grid-template-columns:1fr}.script-scenes{display:none}.edit-ui{height:470px}.preview-frame-text b{font-size:24px}.result-ui{height:470px;grid-template-columns:1fr}.result-side{display:none}.draft-stage-bottom{align-items:flex-start;flex-direction:column}.draft-stage-controls{align-self:flex-end}}
 
-@keyframes paperDrift{0%,100%{translate:0 0}50%{translate:0 -5px}}
-.draft-panel.active .paper-note{animation:paperDrift 5s ease-in-out infinite}
-.draft-panel.active .paper-note:nth-child(2n){animation-delay:-2s}
-
-@media(max-width:980px){
-  .draft-lab-scroll{height:auto}
-  .draft-lab{position:relative;top:auto;height:auto;min-height:0;grid-template-columns:1fr;border-radius:30px}
-  .draft-main{padding:26px}
-  .draft-head{display:block}
-  .draft-copy{max-width:720px;margin-top:12px}
-  .draft-canvas{height:500px;flex:none}
-  .draft-nav{border-left:0;border-top:1px solid var(--line);padding:18px 22px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
-  .draft-nav-label,.draft-nav-bottom{display:none}
-  .draft-step{display:block;text-align:center;padding:0}
-  .draft-step:before{display:none}
-  .draft-step-num{margin:0 auto 7px}
-  .draft-step-text small{display:none}
-}
-@media(max-width:620px){
-  .draft-lab-wrap{padding-top:6px}
-  .draft-lab{border-radius:24px}
-  .draft-main{padding:18px}
-  .draft-title{font-size:36px}
-  .draft-copy{font-size:13px}
-  .draft-canvas{height:510px;border-radius:20px}
-  .draft-panel{padding:18px}
-  .draft-nav{grid-template-columns:repeat(5,1fr);padding:14px 10px;gap:3px}
-  .draft-step-text b{font-size:10px}
-  .draft-step-num{width:28px;height:28px}
-  .paper-note{font-size:11px;max-width:155px;padding:10px}
-  .paper-note.n1{left:4%;top:18%}.paper-note.n2{left:37%;top:8%}.paper-note.n3{right:3%;top:26%}.paper-note.n4{left:8%;bottom:15%}.paper-note.n5{right:10%;bottom:10%}
-  .analysis-grid{grid-template-columns:1fr;overflow:auto}
-  .script-ui{grid-template-columns:1fr}
-  .script-scenes{display:none}
-  .result-ui{grid-template-columns:1fr}
-  .result-side{display:none}
-}
-.motion-reveal{opacity:0;transform:translateY(24px) scale(.985);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--delay,0ms)}
-.motion-reveal.is-visible{opacity:1;transform:none}
-.block,.skill,.plan,.card,.contact,.notfor-card,.step,.review-card{transition:border-color .25s ease,box-shadow .25s ease,background .25s ease,transform .25s ease}
-.block.motion-reveal.is-visible:hover,.skill.motion-reveal.is-visible:hover,.plan.motion-reveal.is-visible:hover,.card.motion-reveal.is-visible:hover,.contact.motion-reveal.is-visible:hover,.notfor-card.motion-reveal.is-visible:hover,.step.motion-reveal.is-visible:hover{border-color:rgba(216,255,79,.24);box-shadow:0 18px 60px rgba(0,0,0,.20),0 0 0 1px rgba(216,255,79,.035) inset;transform:translateY(-4px)}
-.work-card.motion-reveal.is-visible:hover{transform:translateY(-5px);box-shadow:0 18px 55px rgba(0,0,0,.22)}
-.kicker .dot{animation:pulseDot 1.8s ease-in-out infinite}
-.mark{animation:markPulse 5s ease-in-out infinite}
-.primary,.float{position:relative;overflow:hidden}
-.primary:after,.float:after{content:"";position:absolute;top:-30%;bottom:-30%;width:35%;left:-50%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transform:skewX(-20deg);animation:buttonSweep 5.5s ease-in-out infinite}
-@keyframes gradientFlow{to{background-position:220% center}}
-@keyframes heroFloat{0%,100%{transform:rotate(.7deg) translateY(0)}50%{transform:rotate(-.2deg) translateY(-10px)}}
-@keyframes gridDrift{to{background-position:44px 44px,44px 44px}}
-@keyframes ambientA{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(15vw,8vh,0) scale(1.18)}}
-@keyframes ambientB{0%{transform:translate3d(0,0,0) scale(.95)}100%{transform:translate3d(-12vw,-10vh,0) scale(1.15)}}
-
-@keyframes pulseDot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.65}}
-@keyframes markPulse{0%,100%{box-shadow:0 0 0 rgba(216,255,79,0)}50%{box-shadow:0 0 28px rgba(216,255,79,.18)}}
-@keyframes buttonSweep{0%,68%{left:-50%}82%,100%{left:135%}}
 @media(max-width:1120px){.menu{gap:14px;font-size:13px}.hero{padding-top:54px}.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:26px}.hero-video-card{margin-top:72px}h1{font-size:clamp(46px,6.2vw,70px)}}
 @media(max-width:980px){.hero-video-card{animation:none}.menu{display:none}.hero-grid,.head,.video-grid,.beginner-box{grid-template-columns:1fr}.hero-grid{gap:28px}.visual{transform:none}.hero-video-card{margin-top:4px;max-width:760px;justify-self:center}.lead{max-width:820px}.statgrid{grid-template-columns:repeat(2,1fr)}.skills{grid-template-columns:repeat(2,1fr)}.beginner-points{grid-template-columns:1fr}.plans,.contacts{grid-template-columns:1fr}.notfor-head{grid-template-columns:1fr}.notfor-grid{grid-template-columns:repeat(2,1fr)}.works-grid{grid-template-columns:repeat(2,1fr)}.reviews-head{align-items:flex-start}.schedule-grid{grid-template-columns:repeat(2,1fr)}.step{grid-template-columns:56px 1fr}.step .smallbtn{grid-column:2;justify-self:start}.step-actions{grid-column:2;justify-content:flex-start}.cta{grid-template-columns:1fr}.cta-actions{justify-content:flex-start}.cta .pill{justify-self:start}}
 @media(max-width:620px){.wrap{width:calc(100% - 24px)}.navin{height:66px}.brand span{font-size:14px}.navcta,.nav .primary{font-size:13px;padding:10px 13px}h1{font-size:clamp(42px,13.2vw,54px);letter-spacing:-.055em}.hero{padding:38px 0 30px}.kicker{font-size:12px;line-height:1.25}.lead{font-size:17px}.hero-vk-meta{align-items:flex-start;flex-direction:column;gap:4px}.statgrid,.grid2,.skills,.notfor-grid,.works-grid,.schedule-grid{grid-template-columns:1fr}.stats{padding-bottom:42px}.beginner-section{padding:6px 0 24px}.beginner-box{padding:20px}.block,.plan,.card,.contact,.notfor{padding:20px}.block{min-height:0}.block h3{margin-top:30px}.price{font-size:44px}.schedule-flag summary{padding:16px;font-size:17px}.schedule-meta{display:none}.schedule-body{padding:0 16px 16px}.schedule-bottom{align-items:flex-start;flex-direction:column}.reviews-head{align-items:flex-start;flex-direction:column}.reviews-track{grid-auto-columns:minmax(278px,88vw)}.review-card{min-height:0;padding:20px}.review-text{font-size:16px}.step{grid-template-columns:48px 1fr;padding:16px;gap:12px}.stepn{width:42px;height:42px}.step .smallbtn{grid-column:2}.cta{padding:26px;border-radius:26px}.cta-actions{width:100%;flex-direction:column}.cta-actions .pill{width:100%}.float{left:12px;right:12px;bottom:10px;text-align:center}.to-top{right:14px;bottom:16px;width:44px;height:44px}.foot{flex-direction:column}footer{padding-bottom:56px}}
 @media(max-width:390px){.wrap{width:calc(100% - 18px)}.brand span{display:none}.mark{width:36px;height:36px}.navin>.pill{font-size:12px;padding:9px 11px}.kicker{border-radius:16px}.actions{gap:8px}.actions .pill{width:100%}.review-avatar{width:54px;height:54px}}
 @media(hover:none),(pointer:coarse){.cursor-spotlight{display:none}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.draft-lab-scroll{height:auto}.draft-lab{position:relative;top:auto;height:auto;min-height:610px}.pill:hover{transform:none}.grad,.hero-video-card,.paper-note,.kicker .dot,.mark,.primary:after,.float:after,body:before,body:after,.hero:before{animation:none!important}.motion-reveal{opacity:1!important;transform:none!important;transition:none!important}.block:hover,.skill:hover,.plan:hover,.card:hover,.contact:hover,.notfor-card:hover,.step:hover,.work-card:hover{transform:none!important}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pill:hover{transform:none}.grad,.hero-video-card,.paper-note,.kicker .dot,.mark,.primary:after,.float:after,body:before,body:after,.hero:before{animation:none!important}.motion-reveal{opacity:1!important;transform:none!important;transition:none!important}.block:hover,.skill:hover,.plan:hover,.card:hover,.contact:hover,.notfor-card:hover,.step:hover,.work-card:hover{transform:none!important}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Контент-маркетинг, аналитика и продакшен","provider":{"@type":"CollegeOrUniversity","name":"Алтайский государственный университет"},"educationalLevel":"Начальный","timeRequired":"PT72H","inLanguage":"ru"}</script>
 </head>
@@ -287,88 +166,69 @@ body:after{right:-18vw;top:42vh;background:var(--cyan);animation:ambientB 19s ea
 <header class="hero"><div class="wrap hero-grid"><div><div class="kicker"><span class="dot"></span>Курс для новичков · можно с нуля · 72 часа · до 2 месяцев</div><h1>Создавай контент,<br><span class="grad">который хочется досмотреть.</span></h1><p class="lead">Вводная программа повышения квалификации АлтГУ для тех, кто <b>никогда не писал сценарии, не монтировал видео</b> или имеет небольшой опыт и хочет получить <b>системное представление о продакшене</b> — от идеи и анализа до монтажа и продвижения на YouTube.</p><div class="actions"><a class="pill primary" href="#formats">Выбрать формат →</a><a class="pill" target="_blank" rel="noopener" href="https://youtu.be/ld7NV1UYH5U?si=WZg3ppIgSXTLrdEd" data-goal="youtube_lecture">Бесплатная лекция ↗</a></div></div><div class="visual hero-video-card"><div class="hero-vk"><iframe src="https://vkvideo.ru/video_ext.php?oid=-15084191&id=456239198&hd=2" title="Рекламный ролик ДПО «Контент-маркетинг, аналитика и продакшен»" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock" allowfullscreen></iframe></div><div class="hero-vk-meta"><span>Рекламный ролик · VK Видео</span><a target="_blank" rel="noopener" href="https://vk.com/video-15084191_456239198" data-goal="vk_promo">Открыть в VK ↗</a></div></div></div></header>
 <div class="stats"><div class="wrap statgrid"><div class="stat"><b><span class="count-up" data-target="4">4</span></b><span>ключевых блока</span></div><div class="stat"><b><span class="count-up" data-target="72">72</span> ч</b><span>программа повышения квалификации</span></div><div class="stat"><b><span class="count-up" data-target="2">2</span></b><span>формата обучения</span></div><div class="stat"><b>до <span class="count-up" data-target="2">2</span> мес.</b><span>обучение в удобном темпе</span></div></div></div>
 <div class="wrap draft-lab-wrap">
-  <div class="draft-lab-scroll" id="draftLabScroll">
-    <div class="draft-lab" id="draftLab">
-      <div class="draft-main">
-        <div class="draft-head">
-          <div><div class="draft-eyebrow">Черновик → результат</div><h2 class="draft-title">Как хаос превращается в видео</h2></div>
-          <p class="draft-copy">Одна и та же идея проходит пять состояний. На компьютере просто прокручивайте страницу; любой этап можно открыть и вручную.</p>
+  <div class="draft-lab" id="draftLab">
+    <div class="draft-lab-head">
+      <div><div class="draft-eyebrow">Черновик → результат</div><h2 class="draft-title">Как идея становится видео</h2></div>
+      <p class="draft-copy">Без залипания и длинной прокрутки: выберите этап и посмотрите, как один и тот же замысел постепенно превращается в готовый медиапродукт.</p>
+    </div>
+
+    <div class="draft-tabs" role="tablist" aria-label="Этапы превращения идеи в видео">
+      <button class="draft-tab active" type="button" data-draft-step="0" role="tab" aria-selected="true"><span class="draft-tab-top"><span class="draft-tab-num">01</span><b>Черновик</b></span><small>хаос идей</small></button>
+      <button class="draft-tab" type="button" data-draft-step="1" role="tab" aria-selected="false"><span class="draft-tab-top"><span class="draft-tab-num">02</span><b>Аналитика</b></span><small>отбор материала</small></button>
+      <button class="draft-tab" type="button" data-draft-step="2" role="tab" aria-selected="false"><span class="draft-tab-top"><span class="draft-tab-num">03</span><b>Сценарий</b></span><small>строим историю</small></button>
+      <button class="draft-tab" type="button" data-draft-step="3" role="tab" aria-selected="false"><span class="draft-tab-top"><span class="draft-tab-num">04</span><b>Монтаж</b></span><small>собираем продукт</small></button>
+      <button class="draft-tab" type="button" data-draft-step="4" role="tab" aria-selected="false"><span class="draft-tab-top"><span class="draft-tab-num">05</span><b>Результат</b></span><small>готовое видео</small></button>
+    </div>
+
+    <div class="draft-stage">
+      <div class="draft-stage-frame">
+        <div class="draft-panel active" data-draft-panel="0">
+          <div class="draft-panel-label">01 / сырой материал</div>
+          <div class="draft-board">
+            <div class="draft-notes">
+              <div class="note-card lime"><strong>Тема</strong>Почему мы любим фильмы-катастрофы?</div>
+              <div class="note-card red"><strong>Сомнение</strong>Начать с «Титаника»? Слишком очевидно.</div>
+              <div class="note-card cyan"><strong>Найти</strong>Исследования про страх и потерю контроля.</div>
+              <div class="note-card"><strong>Кадры</strong>Город / толпа / разрушение / тишина после.</div>
+              <div class="note-card lime"><strong>Вопрос</strong>Зачем зритель вообще это смотрит?</div>
+              <div class="note-card"><strong>Проблема</strong>Материала много, но истории пока нет.</div>
+              <div class="draft-chaos-line">заметки → ссылки → сомнения → примеры → ещё больше заметок</div>
+            </div>
+            <div class="draft-question"><small>Точка старта</small><b>Материал уже есть. Но истории ещё нет.</b><p>Первый шаг — не «сразу монтировать», а понять, что именно вы хотите доказать и зачем зритель должен остаться.</p></div>
+          </div>
         </div>
-        <div class="draft-canvas">
-          <div class="draft-panel active" data-draft-panel="0">
-            <div class="draft-panel-label">01 / сырой материал</div>
-            <div class="paper-note n1 yellow"><em>ТЕМА:</em><br>почему мы любим фильмы-катастрофы?</div>
-            <div class="paper-note n2 red">??? начать с «Титаника»?<br><strong>слишком очевидно</strong></div>
-            <div class="paper-note n3 cyan">найти исследования<br>про страх и контроль</div>
-            <div class="paper-note n4">кадры: город / толпа / разрушение / тишина после</div>
-            <div class="paper-note n5 yellow">главный вопрос:<br><em>зачем зритель это смотрит?</em></div>
-            <div class="draft-scribble">нужен <strong>сильный старт</strong> → конфликт → вывод</div>
-          </div>
 
-          <div class="draft-panel" data-draft-panel="1">
-            <div class="draft-panel-label">02 / аналитика и отбор</div>
-            <div class="analysis-grid">
-              <div class="analysis-col"><h4>Оставляем</h4><div class="analysis-chip good">Страх как безопасное переживание</div><div class="analysis-chip good">Потеря контроля и катастрофа</div><div class="analysis-chip good">Почему зритель возвращается к жанру</div></div>
-              <div class="analysis-col"><h4>Убираем шум</h4><div class="analysis-chip dim">перечислить все фильмы жанра</div><div class="analysis-chip dim">длинная история спецэффектов</div><div class="analysis-chip dim">случайные факты без тезиса</div></div>
-              <div class="thesis-box"><small>Рабочий тезис</small><b>Катастрофическое кино позволяет зрителю безопасно пережить потерю контроля — и снова почувствовать, что порядок можно вернуть.</b></div>
-            </div>
+        <div class="draft-panel" data-draft-panel="1">
+          <div class="draft-panel-label">02 / аналитика и отбор</div>
+          <div class="analysis-flow">
+            <div class="analysis-stack"><h4>Сырой материал</h4><div class="analysis-chip good">Страх как безопасное переживание</div><div class="analysis-chip good">Потеря контроля</div><div class="analysis-chip dim">перечислить все фильмы жанра</div><div class="analysis-chip dim">случайные факты</div></div>
+            <div class="analysis-arrow">→</div>
+            <div class="analysis-output"><h4>После отбора</h4><small>Рабочий тезис</small><b>Катастрофическое кино позволяет безопасно пережить потерю контроля — и снова почувствовать, что порядок можно вернуть.</b></div>
           </div>
+        </div>
 
-          <div class="draft-panel" data-draft-panel="2">
-            <div class="draft-panel-label">03 / сценарий</div>
-            <div class="script-ui">
-              <div class="script-scenes">
-                <div class="scene-row active"><span>00:00–00:35</span>HOOK</div>
-                <div class="scene-row"><span>00:35–02:10</span>Проблема</div>
-                <div class="scene-row"><span>02:10–05:40</span>Аргумент</div>
-                <div class="scene-row"><span>05:40–08:20</span>Поворот</div>
-                <div class="scene-row"><span>08:20–11:20</span>Финал</div>
-              </div>
-              <div class="script-page">
-                <div class="script-h">SCENE 01 — HOOK</div><br>
-                <div class="script-comment"># Чёрный экран. Сначала слышим сирену.</div>
-                <div class="script-voice">VOICE: «Мы платим деньги, чтобы два часа смотреть, как рушится привычный мир. Зачем?»</div><br>
-                <div class="script-broll">B-ROLL: пустой город → толпа → вода → огонь → тишина.</div><br>
-                <div class="script-comment"># Пауза 1,5 сек. Переход к главному вопросу.</div><br>
-                <div class="script-voice">VOICE: «Возможно, дело не в разрушении. А в том, что будет после него».</div>
-              </div>
-            </div>
+        <div class="draft-panel" data-draft-panel="2">
+          <div class="draft-panel-label">03 / сценарий</div>
+          <div class="script-ui">
+            <div class="script-scenes"><div class="scene-row active"><span>00:00–00:35</span>HOOK</div><div class="scene-row"><span>00:35–02:10</span>Проблема</div><div class="scene-row"><span>02:10–05:40</span>Аргумент</div><div class="scene-row"><span>05:40–08:20</span>Поворот</div><div class="scene-row"><span>08:20–11:20</span>Финал</div></div>
+            <div class="script-page"><div class="script-h">SCENE 01 — HOOK</div><br><div class="script-comment"># Чёрный экран. Сначала слышим сирену.</div><div class="script-voice">VOICE: «Мы платим деньги, чтобы два часа смотреть, как рушится привычный мир. Зачем?»</div><br><div class="script-broll">B-ROLL: пустой город → толпа → вода → огонь → тишина.</div><br><div class="script-comment"># Пауза. Переходим к главному вопросу.</div><br><div class="script-voice">VOICE: «Возможно, дело не в разрушении. А в том, что будет после него».</div></div>
           </div>
+        </div>
 
-          <div class="draft-panel" data-draft-panel="3">
-            <div class="draft-panel-label">04 / монтаж и сборка</div>
-            <div class="edit-ui">
-              <div class="preview-frame"><div class="preview-frame-text"><small>Preview / 00:34</small><b>ЗАЧЕМ МЫ СМОТРИМ<br>НА КАТАСТРОФЫ?</b></div></div>
-              <div class="timeline">
-                <div class="timeline-ruler"><span>00:00</span><span>02:00</span><span>04:00</span><span>06:00</span><span>08:00</span><span>10:00</span></div>
-                <div class="track"><div class="track-name">VIDEO</div><div class="track-clips"><span class="clip" style="width:18%"></span><span class="clip cyan" style="width:29%"></span><span class="clip" style="width:22%"></span><span class="clip lime" style="width:25%"></span></div></div>
-                <div class="track"><div class="track-name">B-ROLL</div><div class="track-clips"><span class="clip gray" style="width:10%"></span><span class="clip cyan" style="width:16%"></span><span class="clip gray" style="width:12%"></span><span class="clip cyan" style="width:22%"></span><span class="clip gray" style="width:29%"></span></div></div>
-                <div class="track"><div class="track-name">VOICE</div><div class="track-clips"><span class="clip lime" style="width:42%"></span><span class="clip lime" style="width:35%"></span><span class="clip lime" style="width:18%"></span></div></div>
-                <div class="track"><div class="track-name">MUSIC</div><div class="track-clips"><span class="clip gray" style="width:100%"></span></div></div>
-                <div class="playhead"></div>
-              </div>
-            </div>
+        <div class="draft-panel" data-draft-panel="3">
+          <div class="draft-panel-label">04 / монтаж и сборка</div>
+          <div class="edit-ui">
+            <div class="preview-frame"><div class="preview-frame-text"><small>Preview / 00:34</small><b>ЗАЧЕМ МЫ СМОТРИМ<br>НА КАТАСТРОФЫ?</b></div></div>
+            <div class="timeline"><div class="timeline-ruler"><span>00:00</span><span>02:00</span><span>04:00</span><span>06:00</span><span>08:00</span><span>10:00</span></div><div class="track"><div class="track-name">VIDEO</div><div class="track-clips"><span class="clip" style="width:18%"></span><span class="clip cyan" style="width:29%"></span><span class="clip" style="width:22%"></span><span class="clip lime" style="width:25%"></span></div></div><div class="track"><div class="track-name">B-ROLL</div><div class="track-clips"><span class="clip gray" style="width:10%"></span><span class="clip cyan" style="width:16%"></span><span class="clip gray" style="width:12%"></span><span class="clip cyan" style="width:22%"></span><span class="clip gray" style="width:29%"></span></div></div><div class="track"><div class="track-name">VOICE</div><div class="track-clips"><span class="clip lime" style="width:42%"></span><span class="clip lime" style="width:35%"></span><span class="clip lime" style="width:18%"></span></div></div><div class="track"><div class="track-name">MUSIC</div><div class="track-clips"><span class="clip gray" style="width:100%"></span></div></div><div class="playhead"></div></div>
           </div>
+        </div>
 
-          <div class="draft-panel" data-draft-panel="4">
-            <div class="draft-panel-label">05 / готовый продукт</div>
-            <div class="result-ui">
-              <div class="result-video"><div class="result-play">▶</div><div class="result-caption"><small>Видео-эссе · 11:20</small><b>Почему нам нравится смотреть на конец света?</b></div></div>
-              <div class="result-side"><strong>Из хаоса — в систему.</strong><div class="check">Есть главный тезис</div><div class="check">Есть драматургия</div><div class="check">Есть визуальная логика</div><div class="check">Есть монтажный ритм</div><div class="check">Продукт готов к публикации</div></div>
-            </div>
-          </div>
+        <div class="draft-panel" data-draft-panel="4">
+          <div class="draft-panel-label">05 / готовый продукт</div>
+          <div class="result-ui"><div class="result-video"><div class="result-play">▶</div><div class="result-caption"><small>Видео-эссе · 11:20</small><b>Почему нам нравится смотреть на конец света?</b></div></div><div class="result-side"><strong>Из хаоса — в систему.</strong><div class="check">Есть главный тезис</div><div class="check">Есть драматургия</div><div class="check">Есть визуальная логика</div><div class="check">Есть монтажный ритм</div><div class="check">Продукт готов к публикации</div></div></div>
         </div>
       </div>
-
-      <aside class="draft-nav" aria-label="Этапы превращения черновика в видео">
-        <div class="draft-nav-label">Этапы</div>
-        <button class="draft-step active" type="button" data-draft-step="0"><span class="draft-step-num">01</span><span class="draft-step-text"><b>Черновик</b><small>хаос идей</small></span></button>
-        <button class="draft-step" type="button" data-draft-step="1"><span class="draft-step-num">02</span><span class="draft-step-text"><b>Аналитика</b><small>отбор материала</small></span></button>
-        <button class="draft-step" type="button" data-draft-step="2"><span class="draft-step-num">03</span><span class="draft-step-text"><b>Сценарий</b><small>строим историю</small></span></button>
-        <button class="draft-step" type="button" data-draft-step="3"><span class="draft-step-num">04</span><span class="draft-step-text"><b>Монтаж</b><small>собираем продукт</small></span></button>
-        <button class="draft-step" type="button" data-draft-step="4"><span class="draft-step-num">05</span><span class="draft-step-text"><b>Результат</b><small>готовое видео</small></span></button>
-        <div class="draft-nav-bottom">На курсе вы проходите этот путь целиком — от первой заметки до опубликованного аудиовизуального продукта.</div>
-      </aside>
+      <div class="draft-stage-bottom"><div class="draft-stage-caption" id="draftStageCaption">Начинаем с материала, который ещё не собран в историю.</div><div class="draft-stage-controls"><button class="draft-arrow" id="draftPrev" type="button" aria-label="Предыдущий этап">←</button><button class="draft-arrow" id="draftNext" type="button" aria-label="Следующий этап">→</button></div></div>
     </div>
   </div>
 </div>
@@ -568,42 +428,34 @@ if(portfolioNext) portfolioNext.addEventListener('click',()=>setPortfolio(portfo
 
 
 
-const draftScroll=document.getElementById('draftLabScroll');
 const draftPanels=[...document.querySelectorAll('[data-draft-panel]')];
 const draftSteps=[...document.querySelectorAll('[data-draft-step]')];
+const draftPrev=document.getElementById('draftPrev');
+const draftNext=document.getElementById('draftNext');
+const draftStageCaption=document.getElementById('draftStageCaption');
+const draftCaptions=[
+  'Начинаем с материала, который ещё не собран в историю.',
+  'Убираем шум и формулируем центральную мысль.',
+  'Превращаем тезис в последовательность сцен и реплик.',
+  'Собираем текст, изображение и звук в единый ритм.',
+  'Получаем готовый продукт, который можно публиковать.'
+];
 let draftStage=0;
-function setDraftStage(index,fromClick=false){
-  index=Math.max(0,Math.min(draftPanels.length-1,index));
-  draftStage=index;
-  draftPanels.forEach((panel,i)=>panel.classList.toggle('active',i===index));
+function setDraftStage(index){
+  if(!draftPanels.length) return;
+  draftStage=(index+draftPanels.length)%draftPanels.length;
+  draftPanels.forEach((panel,i)=>panel.classList.toggle('active',i===draftStage));
   draftSteps.forEach((step,i)=>{
-    step.classList.toggle('active',i===index);
-    step.classList.toggle('done',i<index);
-    step.setAttribute('aria-current',i===index?'step':'false');
+    const active=i===draftStage;
+    step.classList.toggle('active',active);
+    step.setAttribute('aria-selected',String(active));
   });
-  if(fromClick && draftScroll && window.innerWidth>980){
-    const rect=draftScroll.getBoundingClientRect();
-    const top=window.scrollY+rect.top;
-    const scrollable=Math.max(1,draftScroll.offsetHeight-window.innerHeight);
-    const target=top+(index/(draftPanels.length-1))*scrollable;
-    window.scrollTo({top:target,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-  }
+  if(draftStageCaption) draftStageCaption.textContent=draftCaptions[draftStage]||'';
 }
-draftSteps.forEach((step,i)=>step.addEventListener('click',()=>setDraftStage(i,true)));
-function updateDraftByScroll(){
-  if(!draftScroll || window.innerWidth<=980 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const rect=draftScroll.getBoundingClientRect();
-  const scrollable=Math.max(1,rect.height-window.innerHeight);
-  const progress=Math.min(1,Math.max(0,-rect.top/scrollable));
-  const index=Math.min(draftPanels.length-1,Math.floor(progress*draftPanels.length));
-  if(index!==draftStage) setDraftStage(index,false);
-}
-if(draftScroll){
-  setDraftStage(0,false);
-  window.addEventListener('scroll',updateDraftByScroll,{passive:true});
-  window.addEventListener('resize',updateDraftByScroll,{passive:true});
-  updateDraftByScroll();
-}
+draftSteps.forEach((step,i)=>step.addEventListener('click',()=>setDraftStage(i)));
+if(draftPrev) draftPrev.addEventListener('click',()=>setDraftStage(draftStage-1));
+if(draftNext) draftNext.addEventListener('click',()=>setDraftStage(draftStage+1));
+setDraftStage(0);
 
 const countEls=[...document.querySelectorAll('.count-up')];
 function animateCount(el){
